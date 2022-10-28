@@ -1,9 +1,8 @@
 import { useState } from "react";
 import FormInput from "../form-input/form-input.component";
-import Button from "../button/button.component";
+import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
 
 import {
-  createuserDocumentFromAuth,
   signInWithGooglePopup,
   signInAuthUserWithEmailAndPassword,
 } from "../../utils/firebase/firebase.utils";
@@ -29,11 +28,14 @@ const SignInForm = () => {
     event.preventDefault();
 
     try {
-      const {user} = await signInAuthUserWithEmailAndPassword(email, password);
+      const { user } = await signInAuthUserWithEmailAndPassword(
+        email,
+        password
+      );
 
       resetFormFields();
     } catch (error) {
-      console.log('user sign in failed', error);
+      console.log("user sign in failed", error);
     }
   };
 
@@ -64,10 +66,12 @@ const SignInForm = () => {
           value={password}
         />
         <div className="buttons-container">
-          <Button type="submit">
-            Sign In
-          </Button>
-          <Button type='button' buttonType={"google"} onClick={signInWithGoogle}>
+          <Button type="submit">Sign In</Button>
+          <Button
+            type="button"
+            buttonType={BUTTON_TYPE_CLASSES.google}
+            onClick={signInWithGoogle}
+          >
             Sign In with Google
           </Button>
         </div>
